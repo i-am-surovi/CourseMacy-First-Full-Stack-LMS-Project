@@ -1,11 +1,12 @@
 import React from 'react'
 import { Button } from './components/ui/button'
 import Navbar from './components/Navbar'
+import Hero from './components/Hero'
 const App = () => {
   return (
     <div>
       <Navbar/>
-      <Button>Click Me</Button>
+      <Hero/>
     </div>
   )
 }
