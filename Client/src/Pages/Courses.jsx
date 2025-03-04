@@ -1,12 +1,13 @@
 import Hero from '@/components/Hero'
+import Navbar from '@/components/Navbar'
 import React from 'react'
 
-const Home = () => {
+const Courses = () => {
   return (
     <div>
-      <Hero/> 
+      Courses
     </div>
   )
 }
 
-export default Home
+export default Courses
