@@ -9,3 +9,5 @@
 **npx shadcn@latest add input**
 -To Implement Radio    
 **npx shadcn@latest add radio-group**
+-To Implement Card   
+**npx shadcn@latest add card**

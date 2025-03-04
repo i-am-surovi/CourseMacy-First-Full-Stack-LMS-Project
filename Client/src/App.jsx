@@ -7,6 +7,7 @@ import Home from "./Pages/Home";
 import Courses from "./Pages/Courses";
 import Login from "./Pages/auth/Login";
 import Signup from "./Pages/auth/Signup";
+import Footer from "./components/Footer";
 
 
 
@@ -33,6 +34,7 @@ const App = () => {
   return (
     <>
       <RouterProvider router={router}/>
+      <Footer/>
     </>
   );
 };
