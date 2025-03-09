@@ -11,3 +11,7 @@
 **npx shadcn@latest add radio-group**
 -To Implement Card   
 **npx shadcn@latest add card**
+
+# Install Server
+- npm i express nodemon mongoose dotenv jsonwebtoken
+

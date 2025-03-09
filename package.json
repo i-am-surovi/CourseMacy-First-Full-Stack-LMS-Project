@@ -1,0 +1,17 @@
+{
+  "name": "lms-website",
+  "version": "1.0.0",
+  "description": "- To Implement React Counter:    \r **npm i react-countup** \r - To Implement React Router Dom   \r **npm i react-router-dom**\r - To Implement label from shadcn/ui   \r **npx shadcn@latest add label**\r - To Implement Input   \r **npx shadcn@latest add input**\r -To Implement Radio    \r **npx shadcn@latest add radio-group**\r -To Implement Card   \r **npx shadcn@latest add card**",
+  "main": "index.js",
+  "dependencies": {
+    "lucide": "^0.477.0",
+    "lucide-react": "^0.477.0",
+    "react": "^19.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
