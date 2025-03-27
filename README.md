@@ -11,6 +11,8 @@
 **npx shadcn@latest add radio-group**
 -To Implement Card   
 **npx shadcn@latest add card**
+-To hide password
+**npm i bcryptjs**
 
 # Install Server
 - npm i express nodemon mongoose dotenv jsonwebtoken
