@@ -20,8 +20,12 @@
 - To Implement Sonner          
 **npx shadcn@latest add sonner**    
 - To add axios      
-**npm i axios**  
+**npm i axios**     
+- To use persist using chrome extension      
+**npm i redux-persist**
 
 # Install Server
 - npm i express nodemon mongoose dotenv jsonwebtoken
 
+# Install Redux      
+- npm install @reduxjs/toolkit react-redux

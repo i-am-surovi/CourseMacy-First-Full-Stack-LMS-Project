@@ -3,9 +3,11 @@ import { GraduationCap } from "lucide-react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const user = false;
+  const { user } = useSelector((store) => store.auth);
+  //const user = false;
   return (
     <div className="bg-gray-900 z-50 w-full py-3 fixed top-0">
       <div className="max-w-7xl mx-auto flex justify-between">
@@ -20,26 +22,38 @@ const Navbar = () => {
         {/* menu section */}
         <nav>
           <ul className="flex gap-7 text-xl items-center font-semibold text-white">
-            <Link to="/"><li className="cursor-pointer">Home</li></Link> 
-            <Link to="/courses"><li className="cursor-pointer">Courses</li></Link>
-            
+            <Link to="/">
+              <li className="cursor-pointer">Home</li>
+            </Link>
+            <Link to="/courses">
+              <li className="cursor-pointer">Courses</li>
+            </Link>
 
             {!user ? (
               <div className="flex gap-3">
-                <Link to="/login"><Button className="bg-blue-500 hover:bg-blue-600">Login</Button></Link>
-                <Link to="/signup"><Button className="bg-gray-700 hover:bg-gray-800">
-                  Signup
-                </Button></Link>
+                <Link to="/login">
+                  <Button className="bg-blue-500 hover:bg-blue-600">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/signup">
+                  <Button className="bg-gray-700 hover:bg-gray-800">
+                    Signup
+                  </Button>
+                </Link>
               </div>
             ) : (
               <div className="flex items-center gap-7">
-                <Avatar>
-                  <AvatarImage
-                    src="https://github.com/shadcn.png"
-                    alt="@shadcn"
-                  />
-                  <AvatarFallback>CN</AvatarFallback>
-                </Avatar>
+                <Link to="/profile">
+                  <Avatar>
+                    <AvatarImage
+                      src="https://github.com/shadcn.png"
+                      alt="@shadcn"
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </Link>
+
                 <Button className="bg-blue-500 hover:bg-blue-600">
                   Logout
                 </Button>
