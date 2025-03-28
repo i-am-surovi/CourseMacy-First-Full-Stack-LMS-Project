@@ -4,10 +4,11 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup } from "@/components/ui/radio-group";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Signup = () => {
+  const navigate = useNavigate()
   const [user, setUser] = useState({
     name: "",
     email: "",
@@ -24,7 +25,8 @@ const Signup = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault(), console.log(user);
+    e.preventDefault(), 
+    console.log(user);
     try {
       const response = await axios.post(
         "http://localhost:8000/api/v1/user/register",
@@ -37,6 +39,7 @@ const Signup = () => {
         }
       );
       if (response.data.success) {
+        navigate('/login')
         toast.success(response.data.message);
       }else{
         toast.error("something went wrong")
