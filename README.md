@@ -13,6 +13,8 @@
 **npx shadcn@latest add card**
 -To hide password
 **npm i bcryptjs**
+-To use cookie
+**npm i cookie-parser**
 
 # Install Server
 - npm i express nodemon mongoose dotenv jsonwebtoken

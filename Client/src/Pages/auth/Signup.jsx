@@ -1,11 +1,50 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import React from "react";
+import { RadioGroup } from "@/components/ui/radio-group";
+import axios from "axios";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { toast } from "sonner";
 
 const Signup = () => {
+  const [user, setUser] = useState({
+    name: "",
+    email: "",
+    password: "",
+    role: "student",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault(), console.log(user);
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/v1/user/register",
+        user,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+      if (response.data.success) {
+        toast.success(response.data.message);
+      }else{
+        toast.error("something went wrong")
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
@@ -18,32 +57,70 @@ const Signup = () => {
         {/* Name Input */}
         <div className="mb-4">
           <Label className="mb-1">Full Name</Label>
-          <Input placeholder="Enter Your Name" />
+          <Input
+            placeholder="Enter Your Name"
+            name="name"
+            value={user.name}
+            onChange={handleChange}
+            type="text"
+            id="name"
+          />
         </div>
         {/* Email Input */}
         <div className="mb-4">
           <Label className="mb-1">Email Address</Label>
-          <Input placeholder="Enter Your Email" />
+          <Input
+            placeholder="Enter Your Email"
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
         </div>
         {/* Password Input */}
         <div className="mb-4">
           <Label className="mb-1">Password</Label>
-          <Input placeholder="Enter Your Password" />
+          <Input
+            type="password"
+            placeholder="Enter Your Password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
         </div>
         <div className="mb-4">
           <Label>Role</Label>
-          <RadioGroup defaultValue="option-one" className="flex gap-4 mt-2">
+          <RadioGroup className="flex gap-4 mt-2 peer">
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-one" id="option-one" />
-              <Label htmlFor="option-one">Student</Label>
+              <Input
+                type="radio"
+                id="role1"
+                name="role"
+                value="student"
+                checked={user.role === "student"}
+                onChange={handleChange}
+              />
+              <Label htmlFor="role1">Student</Label>
             </div>
             <div className="flex items-center space-x-2">
-              <RadioGroupItem value="option-two" id="option-two" />
-              <Label htmlFor="option-two">Instructor</Label>
+              <Input
+                type="radio"
+                id="role2"
+                name="role"
+                value="instructor"
+                checked={user.role === "instructor"}
+                onChange={handleChange}
+              />
+              <Label htmlFor="role2">Instructor</Label>
             </div>
           </RadioGroup>
         </div>
-        <Button className="w-full bg-blue-500 hover:bg-blue-600">Signup</Button>
+        <Button
+          onClick={handleSubmit}
+          className="w-full bg-blue-500 hover:bg-blue-600"
+        >
+          Signup
+        </Button>
         <p className="text-center mt-4">
           Already have an account?{" "}
           <Link to="/login" className="text-blue-500 hover:underline">

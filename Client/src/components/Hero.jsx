@@ -13,6 +13,9 @@ const Hero = () => {
             Explore Our <span className="text-blue-500">14000+</span> <br />{" "}
             Online courses for all
           </h1>
+          <p className="text-blue-400 text-2xl font-bold">
+          Empowering Knowledge, Building Relationships
+          </p>
           <p className="text-gray-300 text-lg">
             Unlock your potential with expert-led courses designed to help you
             learn, grow, and succeed anytime, anywhere.

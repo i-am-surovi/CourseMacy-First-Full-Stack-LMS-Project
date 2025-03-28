@@ -13,7 +13,7 @@ const Navbar = () => {
         <Link to="/">
           <div className="flex gap-1">
             <GraduationCap className="text-gray-300 w-10 h-10" />
-            <h1 className="text-gray-300 text-3xl font-bold">Knowsy</h1>
+            <h1 className="text-gray-300 text-3xl font-bold">coursemacy</h1>
           </div>
         </Link>
 
