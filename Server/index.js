@@ -20,7 +20,7 @@ app.use(cors({
     credentials: true
 }))
 
-//apis
+//apis 
 app.use("/api/v1/user",userRoute);
 
 

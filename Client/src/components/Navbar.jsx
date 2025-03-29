@@ -69,7 +69,7 @@ const Navbar = () => {
                 <Link to="/profile">
                   <Avatar>
                     <AvatarImage
-                      src="https://github.com/shadcn.png"
+                      src={user.photoUrl}
                       alt="@shadcn"
                     />
                     <AvatarFallback>CN</AvatarFallback>

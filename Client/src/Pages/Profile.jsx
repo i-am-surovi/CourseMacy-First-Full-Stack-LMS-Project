@@ -12,15 +12,23 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { toast } from "sonner";
+import { Loader2 } from "lucide-react";
+import { setUser } from "@/redux/authSlice";
 
 const Profile = () => {
+  const dispatch = useDispatch()
   const { user } = useSelector((store) => store.auth);
   const [input, setInput] = useState({
     name: user?.name,
     description: user?.description,
     file: user?.photoUrl,
   });
+
+  const [loading, setLoading] = useState(false)
+  const [open, setOpen] = useState(false)
 
   const changeEventHandler = (e) => {
     const { name, value } = e.target;
@@ -32,6 +40,36 @@ const Profile = () => {
 
   const changeFileHandler = (e) => {
     setInput({ ...input, file: e.target.files?.[0] });
+  };
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", input.name);
+    formData.append("description", input.description);
+    if (input?.file) {
+      formData.append("file", input?.file);
+    }
+    try {
+      setLoading(true)
+      const res = await axios.put("http://localhost:8000/api/v1/user/profile/update",formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+          withCredentials: true,
+      })
+      if (res.data.success) {
+        setOpen(false)
+        toast.success(res.data.message);
+        dispatch(setUser(res.data.user));
+        // console.log(input);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -63,10 +101,8 @@ const Profile = () => {
               {user?.description || "Add Your bio"}
             </p>
 
-            <Dialog>
-              <DialogTrigger>
-                <Button className="bg-blue-500">Edit Profile</Button>
-              </DialogTrigger>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <Button onClick={()=>setOpen(true)} className="bg-blue-500">Edit Profile</Button>
               <DialogContent className="sm:max-w-[425px]">
                 <DialogHeader>
                   <DialogTitle className="text-center">
@@ -99,7 +135,7 @@ const Profile = () => {
                       id="description"
                       name="description"
                       value={input.description}
-                      onChange={changeEventHandler} 
+                      onChange={changeEventHandler}
                       className="col-span-3 text-gray-500"
                       placeholder="Hey I am a full stack web developer"
                     />
@@ -118,7 +154,9 @@ const Profile = () => {
                   </div>
                 </div>
                 <DialogFooter>
-                  <Button className="bg-blue-500">Save Changes</Button>
+                  {
+                    loading ? <Button className="bg-blue-400"><Loader2 className="mr-2 w-4 h-4 animate-spin"/> Please wait</Button>: <Button onClick={submitHandler} className="bg-blue-500">Save Changes</Button>
+                  }
                 </DialogFooter>
               </DialogContent>
             </Dialog>
