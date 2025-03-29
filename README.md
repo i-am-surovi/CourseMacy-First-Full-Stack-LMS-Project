@@ -22,10 +22,19 @@
 - To add axios      
 **npm i axios**     
 - To use persist using chrome extension      
-**npm i redux-persist**
+**npm i redux-persist**      
+- To use dialogue box      
+**npx shadcn@latest add dialog**    
+- To use multer       
+**npm i multer**      
+- To use datauri       
+**npm i datauri**
 
 # Install Server
 - npm i express nodemon mongoose dotenv jsonwebtoken
 
 # Install Redux      
 - npm install @reduxjs/toolkit react-redux
+
+# Install Cloudinary
+- npm i cloudinary

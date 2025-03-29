@@ -2,12 +2,34 @@ import React from "react";
 import { GraduationCap } from "lucide-react";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { setUser } from "@/redux/authSlice";
+import { toast } from "sonner";
 
 const Navbar = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
   const { user } = useSelector((store) => store.auth);
-  //const user = false;
+
+  const logoutHandler = async (e) => {
+    e.preventDefault()
+    try {
+      const res = await axios.get("http://localhost:8000/api/v1/user/logout", {
+        withCredentials: true,
+      });
+      if (res.data.success) {
+        navigate('/')
+        dispatch(setUser(null));
+        toast.success(res.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.message);
+    }
+  };
+
   return (
     <div className="bg-gray-900 z-50 w-full py-3 fixed top-0">
       <div className="max-w-7xl mx-auto flex justify-between">
@@ -54,7 +76,10 @@ const Navbar = () => {
                   </Avatar>
                 </Link>
 
-                <Button className="bg-blue-500 hover:bg-blue-600">
+                <Button
+                  onClick={logoutHandler}
+                  className="bg-blue-500 hover:bg-blue-600"
+                >
                   Logout
                 </Button>
               </div>

@@ -39,7 +39,7 @@ const Hero = () => {
             alt=""
             className="w-[750px] shadow-blue-500 drop-shadow-lg"
           />
-          <div className="bg-slate-200 hidden md:flex gap-3 items-center rounded-md absolute top-[32%] right-0 px-4 py-2">
+          <div className="bg-slate-200 hidden md:flex gap-3 items-center rounded-md absolute top-[28%] right-2 px-4 py-2">
             <div className="rounded-full bg-blue-400 p-2 text-white">
               <User />
             </div>
@@ -52,7 +52,7 @@ const Hero = () => {
               </p>
             </div>
           </div>
-          <div className="bg-slate-200 hidden md:flex gap-3 items-center rounded-md absolute top-[16%] left-11 px-4 py-2">
+          <div className="bg-slate-200 hidden md:flex gap-3 items-center rounded-md absolute top-[14%] left-12 px-4 py-2">
             <div className="rounded-full bg-blue-400 p-2 text-white">
               <Award />
             </div>
