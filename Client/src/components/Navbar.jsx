@@ -66,6 +66,9 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex items-center gap-7">
+                {
+                  user.role === 'instructor' && <Link to="/admin/dashboard"><li className="cursor-pointer">Admin</li></Link>
+                }
                 <Link to="/profile">
                   <Avatar>
                     <AvatarImage

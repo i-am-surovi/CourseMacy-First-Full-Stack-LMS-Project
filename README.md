@@ -28,7 +28,9 @@
 - To use multer       
 **npm i multer**      
 - To use datauri       
-**npm i datauri**
+**npm i datauri**     
+- To install Select     
+**npx shadcn@latest add select**
 
 # Install Server
 - npm i express nodemon mongoose dotenv jsonwebtoken
@@ -38,3 +40,6 @@
 
 # Install Cloudinary
 - npm i cloudinary
+
+# Install Table   
+- npx shadcn@latest add table
