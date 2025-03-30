@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import authSlice from "./authSlice"
+import courseSlice from "./courseSlice"
 import {
   persistReducer,
   FLUSH,
@@ -18,7 +19,8 @@ const persistConfig = {
   }
 
   const rootReducer = combineReducers({
-    auth:authSlice
+    auth:authSlice,
+    course:courseSlice
   })
 
 

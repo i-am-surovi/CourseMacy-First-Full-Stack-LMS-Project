@@ -25,6 +25,8 @@
 **npm i redux-persist**      
 - To use dialogue box      
 **npx shadcn@latest add dialog**    
+- To use badge      
+**npx shadcn@latest add badge**    
 - To use multer       
 **npm i multer**      
 - To use datauri       
