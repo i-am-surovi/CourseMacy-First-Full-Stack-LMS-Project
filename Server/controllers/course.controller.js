@@ -79,7 +79,7 @@ export const getCreatorCourses = async (req, res) => {
 export const editCourse = async (req, res) => {
     try {
         const courseId = req.params.courseId;
-        const {courseTitle, subTitle, description, category, courseLevel, CoursePrice} = req.body;
+        const {courseTitle, subTitle, description, category, courseLevel, courseType, coursePrice} = req.body;
         const file = req.file;
 
         let course = await Course.findById(courseId);
@@ -93,7 +93,7 @@ export const editCourse = async (req, res) => {
             const fileUri = getDataUri(file)
             courseThumbnail = await cloudinary.uploader.upload(fileUri)
         }
-        const UpdateData = {courseTitle, subTitle, description, category, courseLevel, CoursePrice, courseThumbnail:courseThumbnail?.secure_url};
+        const UpdateData = {courseTitle, subTitle, description, category, courseLevel, courseType, coursePrice, courseThumbnail:courseThumbnail?.secure_url};
         course = await Course.findByIdAndUpdate(courseId, UpdateData, {new:true});
         return res.status(200).json({
             success:true,
