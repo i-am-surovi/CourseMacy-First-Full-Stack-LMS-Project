@@ -1,4 +1,6 @@
 import { Course } from "../models/course.model.js";
+import cloudinary from "../utils/cloud.js";
+import getDataUri from "../utils/dataUri.js";
 
 export const createCourse = async(req, res) => {
     try {
@@ -43,7 +45,7 @@ export const getPublishedCourse = async(_, res)=>{
     } catch (error) {
         console.log(error)
         return res.status(500).json({
-            message:"Failed to get course",
+            message:"Failed to get published course",
             success:false
         })
     }
@@ -68,9 +70,62 @@ export const getCreatorCourses = async (req, res) => {
     } catch (error) {
         console.log(error)
         return res.status(500).json({
-            message:"Failed to get course",
+            message:"Failed to create course",
             success:false
         })
     }
 }
 
+export const editCourse = async (req, res) => {
+    try {
+        const courseId = req.params.courseId;
+        const {courseTitle, subTitle, description, category, courseLevel, CoursePrice} = req.body;
+        const file = req.file;
+
+        let course = await Course.findById(courseId);
+        if(!course){
+            return res.status(404).json({
+                message:"Course not found!"
+            })
+        }
+        let courseThumbnail;
+        if(file){
+            const fileUri = getDataUri(file)
+            courseThumbnail = await cloudinary.uploader.upload(fileUri)
+        }
+        const UpdateData = {courseTitle, subTitle, description, category, courseLevel, CoursePrice, courseThumbnail:courseThumbnail?.secure_url};
+        course = await Course.findByIdAndUpdate(courseId, UpdateData, {new:true});
+        return res.status(200).json({
+            success:true,
+            course,
+            message:"Course updated successfully"
+        })
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            message:"Failed to update course",
+            success:false
+        })
+    }
+}
+
+export const getCourseById = async (req, res) => {
+    try {
+        const {courseId} = req.params;
+        const course = await Course.findById(courseId)
+        if(!course){
+            return res.status(404).json({
+                message:"Course not found!"
+            })
+        }
+        return res.status(200).json({
+            success:true,
+            course
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            message:"Failed to get course by id"
+        })
+    }
+}
