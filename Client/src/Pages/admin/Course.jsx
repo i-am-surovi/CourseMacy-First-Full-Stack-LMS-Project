@@ -18,26 +18,29 @@ import { setCourse } from "@/redux/courseSlice";
 import { Edit } from "lucide-react";
 
 const Course = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const {course} = useSelector(store=>store.course)
-  useEffect(()=> {
-    const getCreatorCourse = async ()=> {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { course } = useSelector((store) => store.course);
+  useEffect(() => {
+    const getCreatorCourse = async () => {
       try {
-        const res = await axios.get('http://localhost:8000/api/v1/course/', {withCredentials:true})
-        if(res.data.success){
-          dispatch(setCourse(res.data.courses))
+        const res = await axios.get("http://localhost:8000/api/v1/course/", {
+          withCredentials: true,
+        });
+        if (res.data.success) {
+          dispatch(setCourse(res.data.courses));
         }
       } catch (error) {
         console.log(error);
-
       }
-    }
-    getCreatorCourse()
-  })
+    };
+    getCreatorCourse();
+  });
   return (
     <div className="md:p-10 p-4 w-full h-screen">
-      <Button className="bg-blue-500" onClick={()=>navigate('create')}>Create Course</Button>
+      <Button className="bg-blue-500" onClick={() => navigate("create")}>
+        Create Course
+      </Button>
       <Table className="mt-10">
         <TableCaption>A list of your recent courses.</TableCaption>
         <TableHeader>
@@ -52,7 +55,7 @@ const Course = () => {
           {course?.map((course) => (
             <TableRow key={course._id}>
               <TableCell className="md:w-[300px] flex items-center gap-2">
-                <img src={course?.courseThumbnail} alt="Thumbnail"/>
+                <img src={course?.courseThumbnail} alt="Thumbnail" />
                 {course.courseTitle}
               </TableCell>
 
@@ -61,12 +64,20 @@ const Course = () => {
               </TableCell>
 
               <TableCell className="text-center">
-                <Badge className={course.isPublished ? "bg-green-400" : "bg-red-400"}>
-                  {course.isPublished ? "Published":"Draft"}
+                <Badge
+                  className={course.isPublished ? "bg-green-400" : "bg-red-400"}
+                >
+                  {course.isPublished ? "Published" : "Draft"}
                 </Badge>
               </TableCell>
-              <TableCell className="text-right"><Button variant="ghost"><Edit/></Button></TableCell>
-
+              <TableCell className="text-right">
+                <Button
+                  variant="ghost"
+                  onClick={() => navigate(`/admin/course/${course._id}`)}
+                >
+                  <Edit />
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

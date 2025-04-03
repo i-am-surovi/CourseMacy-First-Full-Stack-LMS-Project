@@ -13,6 +13,7 @@ import Admin from "./Pages/admin/Admin";
 import Dashboard from "./Pages/admin/Dashboard";
 import Course from "./Pages/admin/Course";
 import CreateCourse from "./Pages/admin/CreateCourse";
+import UpdateCourse from "./Pages/admin/UpdateCourse";
 
 
 
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "course/create",
         element: <CreateCourse/>
+      },
+      {
+        path: "course/:courseId",
+        element: <UpdateCourse/>
       }
     ]
   },
