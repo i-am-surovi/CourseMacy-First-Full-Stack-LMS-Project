@@ -44,4 +44,7 @@
 - npm i cloudinary
 
 # Install Table   
-- npx shadcn@latest add table
+- npx shadcn@latest add table     
+
+# Install React Quill     
+- npm i react-quill / npm install react-quill --legacy-peer-deps
