@@ -48,6 +48,7 @@ const Course = () => {
             <TableHead className="w-[100px]">Course</TableHead>
             <TableHead className="text-right">Price</TableHead>
             <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Type</TableHead>
             <TableHead className="text-right">Action</TableHead>
           </TableRow>
         </TableHeader>
@@ -60,7 +61,7 @@ const Course = () => {
               </TableCell>
 
               <TableCell className="font-medium text-right">
-                {course.coursePrice || "NA"}
+              {course.coursePrice === 0 ? 0 : course.coursePrice || "NA"}
               </TableCell>
 
               <TableCell className="text-center">
@@ -70,6 +71,16 @@ const Course = () => {
                   {course.isPublished ? "Published" : "Draft"}
                 </Badge>
               </TableCell>
+
+              <TableCell className="text-center">
+                <Badge
+                  className={course.coursePrice != "NA" && course.coursePrice > 0 ? "bg-green-600" : "bg-blue-700"}
+                  >
+                  {course.coursePrice != "NA" && course.coursePrice > 0 ? "Paid" : "Free"}
+                  
+                </Badge>
+              </TableCell>
+
               <TableCell className="text-right">
                 <Button
                   variant="ghost"

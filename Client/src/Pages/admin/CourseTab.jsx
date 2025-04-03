@@ -247,7 +247,7 @@ const CourseTab = () => {
                 <SelectGroup>
                   <SelectLabel>Course Type</SelectLabel>
                   <SelectItem value="Paid">Paid</SelectItem>
-                  <SelectItem value="Unpaid">Unpaid</SelectItem>
+                  <SelectItem value="Free">Free</SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

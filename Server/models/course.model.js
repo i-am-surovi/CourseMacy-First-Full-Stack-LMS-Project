@@ -17,7 +17,7 @@ const courseSchema = new mongoose.Schema({
   },
   courseType: {
     type: String,
-    enum: ["Paid", "Unpaid"],
+    enum: ["Paid", "Free"],
   },
   coursePrice: {
     type: Number,
