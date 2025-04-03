@@ -116,6 +116,21 @@ const CourseTab = () => {
               className="w-fit"
             />
           </div>
+          <div>
+            <Label>Course Type</Label>
+            <Select>
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select a course type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Paid/Unpaid</SelectLabel>
+                  <SelectItem value="Beginner">Paid</SelectItem>
+                  <SelectItem value="Advance">Unpaid</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
         <div className="mb-4">
           <Label>Course Thumbnail</Label>
