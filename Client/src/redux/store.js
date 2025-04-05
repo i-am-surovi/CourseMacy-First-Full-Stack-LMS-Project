@@ -1,6 +1,7 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import authSlice from "./authSlice"
-import courseSlice from "./courseSlice"
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import authSlice from "./authSlice";
+import courseSlice from "./courseSlice";
+import lectureSlice from "./lectureSlice";
 import {
   persistReducer,
   FLUSH,
@@ -9,22 +10,23 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
-import storage from 'redux-persist/lib/storage'
+} from "redux-persist";
+import storage from "redux-persist/lib/storage";
+import { Lectern } from "lucide-react";
 
 const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage,
-  }
+  key: "root",
+  version: 1,
+  storage,
+};
 
-  const rootReducer = combineReducers({
-    auth:authSlice,
-    course:courseSlice
-  })
+const rootReducer = combineReducers({
+  auth: authSlice,
+  course: courseSlice,
+  lecture: lectureSlice,
+});
 
-
-  const persistedReducer = persistReducer(persistConfig, rootReducer)
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
   reducer: persistedReducer,
@@ -34,6 +36,6 @@ const store = configureStore({
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-})
+});
 
 export default store;

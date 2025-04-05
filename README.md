@@ -27,6 +27,10 @@
 **npx shadcn@latest add dialog**    
 - To use badge      
 **npx shadcn@latest add badge**    
+- To use switch      
+**npx shadcn@latest add switch**    
+- To use progress     
+**npx shadcn@latest add progress**    
 - To use multer       
 **npm i multer**      
 - To use datauri       
