@@ -33,7 +33,7 @@ export const createCourse = async(req, res) => {
 
 export const getPublishedCourse = async(_, res)=>{
     try {
-        const courses = await Course.find({isPublished:true})
+        const courses = await Course.find({isPublished:true}).populate({path:"creator", select:"name photoUrl description"})
         if(!courses){
             return res.status(404).json({
                 message:"Course not found"
@@ -56,7 +56,7 @@ export const getPublishedCourse = async(_, res)=>{
 export const getCreatorCourses = async (req, res) => {
     try {
         const userId = req.id;
-        const courses = await Course.find({creator:userId});
+        const courses = await Course.find({creator:userId}).populate("lectures");
         if(!courses){
             return res.status(404).json({
                 message:"Course not found",
@@ -83,7 +83,7 @@ export const editCourse = async (req, res) => {
         const {courseTitle, subTitle, description, category, courseLevel, courseType, coursePrice} = req.body;
         const file = req.file;
 
-        let course = await Course.findById(courseId);
+        let course = await Course.findById(courseId).populate("lectures");
         if(!course){
             return res.status(404).json({
                 message:"Course not found!"
@@ -131,6 +131,41 @@ export const getCourseById = async (req, res) => {
     }
 }
 
+export const removeCourse = async (req, res) => {
+    try {
+      const { courseId } = req.params;
+  
+      // Step 1: Find the course
+      const course = await Course.findById(courseId);
+      if (!course) {
+        return res.status(404).json({
+          success: false,
+          message: "Course not found!",
+        });
+      }
+  
+      // Step 2: Delete all lectures linked to this course
+      if (course.lectures.length > 0) {
+        await Lecture.deleteMany({ _id: { $in: course.lectures } });
+      }
+  
+      // Step 3: Delete the course itself
+      await Course.findByIdAndDelete(courseId);
+  
+      return res.status(200).json({
+        success: true,
+        message: "Course removed successfully",
+      });
+  
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({
+        success: false,
+        message: "Failed to remove course",
+      });
+    }
+  };
+  
 
 // Lecture Controller
 export const createLecture = async(req, res)=>{

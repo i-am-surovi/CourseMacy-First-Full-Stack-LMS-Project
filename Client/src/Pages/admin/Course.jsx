@@ -16,6 +16,9 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setCourse } from "@/redux/courseSlice";
 import { Edit } from "lucide-react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBangladeshiTakaSign } from '@fortawesome/free-solid-svg-icons';
+
 
 const Course = () => {
   const navigate = useNavigate();
@@ -61,7 +64,8 @@ const Course = () => {
               </TableCell>
 
               <TableCell className="font-medium text-right">
-              {course.coursePrice === 0 ? 0 : course.coursePrice || "NA"}
+                <FontAwesomeIcon icon={faBangladeshiTakaSign} className="mr-1" />
+                {course.coursePrice === 0 ? 0 : course.coursePrice || "NA"}
               </TableCell>
 
               <TableCell className="text-center">

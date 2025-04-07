@@ -29,6 +29,8 @@
 **npx shadcn@latest add badge**    
 - To use switch      
 **npx shadcn@latest add switch**    
+- To use separator     
+**npx shadcn@latest add separator**    
 - To use progress     
 **npx shadcn@latest add progress**    
 - To use multer       
@@ -45,10 +47,17 @@
 - npm install @reduxjs/toolkit react-redux
 
 # Install Cloudinary
-- npm i cloudinary
+- npm i cloudinary     
+
+# Install React Player
+- npm i react-player
 
 # Install Table   
 - npx shadcn@latest add table     
 
 # Install React Quill     
-- npm i react-quill / npm install react-quill --legacy-peer-deps
+- npm i react-quill / npm install react-quill --legacy-peer-deps  
+
+# Install Taka-Sign     
+- npm install @fortawesome/react-fontawesome @fortawesome/free-solid-svg-icons
+

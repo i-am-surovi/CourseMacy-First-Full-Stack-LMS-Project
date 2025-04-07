@@ -36,7 +36,8 @@ const CourseTab = () => {
 
   const [selectedCourse, setSelectedCourse] = useState(selectCourse);
   const [loading, SetLoading] = useState(false);
-  const [publish, setPublish] = useState(false)
+  const [publish, setPublish] = useState(false);
+  const [removeLoading, setRemoveLoading] = useState(false);
 
   const getCourseById = async () => {
     try {
@@ -66,7 +67,9 @@ const CourseTab = () => {
     coursePrice: selectedCourse?.coursePrice,
     file: "",
   });
-  const [previewThumbnail, setPreviewThumbnail] = useState(selectedCourse?.courseThumbnail);
+  const [previewThumbnail, setPreviewThumbnail] = useState(
+    selectedCourse?.courseThumbnail
+  );
 
   const changeEventHandler = (e) => {
     const { name, value } = e.target;
@@ -131,24 +134,48 @@ const CourseTab = () => {
     }
   };
 
+  const removeCourseHandler = async () => {
+    try {
+      setRemoveLoading(true);
+      const res = await axios.delete(
+        `http://localhost:8000/api/v1/course/${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+      if (res.data.success) {
+        toast.success(res.data.message);
+        navigate("/admin/course");
+      } else {
+        toast.error("Failed to delete course");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong while deleting the course");
+    } finally {
+      setRemoveLoading(false);
+    }
+  };
+
   const togglePublishUnpublish = async (action) => {
     try {
-        const res = await axios.patch(`http://localhost:8000/api/v1/course/${id}`, {
+      const res = await axios.patch(
+        `http://localhost:8000/api/v1/course/${id}`,
+        {
           params: {
-            action
+            action,
           },
-          withCredentials:true
-        })
-        if(res.data.success){
-          setPublish(!publish)
-          toast.success(res.data.message)
+          withCredentials: true,
         }
+      );
+      if (res.data.success) {
+        setPublish(!publish);
+        toast.success(res.data.message);
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-  }
-
-
+  };
 
   return (
     <Card>
@@ -160,8 +187,30 @@ const CourseTab = () => {
           </CardDescription>
         </div>
         <div className="space-x-2">
-          <Button onClick={()=>togglePublishUnpublish(selectedCourse.isPublished ? "false" : "true")} className="bg-gray-800">{selectedCourse.isPublished ? "Unpublish" : "Publish"}</Button>
-          <Button variant="destructive">Remove Course</Button>
+          <Button
+            onClick={() =>
+              togglePublishUnpublish(
+                selectedCourse.isPublished ? "false" : "true"
+              )
+            }
+            className="bg-gray-800"
+          >
+            {selectedCourse.isPublished ? "Unpublish" : "Publish"}
+          </Button>
+          <Button
+            onClick={removeCourseHandler}
+            variant="destructive"
+            disabled={removeLoading}
+          >
+            {removeLoading ? (
+              <>
+                <Loader2 className="mr-1 w-4 h-4 animate-spin" />
+                Please wait
+              </>
+            ) : (
+              "Remove Course"
+            )}
+          </Button>
         </div>
       </CardHeader>
       <CardContent>
