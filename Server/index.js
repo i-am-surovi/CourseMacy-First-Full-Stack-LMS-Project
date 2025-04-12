@@ -6,6 +6,8 @@ import courseRoute from "./routes/course.route.js"
 import mediaRoute from "./routes/media.route.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
+import path from "path"
+import _ from "lodash"
 
 
 dotenv.config()
@@ -22,10 +24,17 @@ app.use(cors({
     credentials: true
 }))
 
+const _dirname = path.resolve()
+
 //apis 
 app.use("/api/v1/user",userRoute);
 app.use("/api/v1/course",courseRoute);
 app.use("/api/v1/media",mediaRoute);
+
+app.use(express.static(path.join(_dirname, "/Client/dist")));
+app.get("*", (_, res)=> {
+    res.sendFile(path.resolve(_dirname, "Client", "dist", "index.html"))
+});
 
 
 app.listen(PORT, ()=>{

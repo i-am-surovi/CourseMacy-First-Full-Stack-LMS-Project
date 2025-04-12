@@ -21,7 +21,7 @@ const Courses = () => {
       }
     }
     getAllPublishedCourse()
-  })
+  }) 
   return (
     <div className="bg-gray-100 pt-14">
       <div className="min-h-screen max-w-7xl mx-auto py-10">
