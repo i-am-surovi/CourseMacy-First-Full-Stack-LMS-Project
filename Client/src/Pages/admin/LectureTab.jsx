@@ -40,7 +40,7 @@ const LectureTab = () => {
       formData.append("file", file);
       setMediaProgress(true);
       try {
-        const res = await axios.post(`http://localhost:8000/api/v1/media/upload-video`, formData, {
+        const res = await axios.post(`https://coursemacy.onrender.com/media/upload-video`, formData, {
             onUploadProgress: ({loaded, total}) => {
               setUploadProgress(Math.round((loaded * 100) / total))
             }
@@ -71,7 +71,7 @@ const LectureTab = () => {
     }
     try {
         setLoading(true)
-        const res = await axios.post(`http://localhost:8000/api/v1/course/${courseId}/lecture/${lectureId}`, data, {
+        const res = await axios.post(`https://coursemacy.onrender.com/course/${courseId}/lecture/${lectureId}`, data, {
             headers: {
                 "Content-Type":"application/json"
             },
@@ -96,7 +96,7 @@ const LectureTab = () => {
     e.preventDefault();
     try {
         setRemoveLoading(true)
-        const res = await axios.delete(`http://localhost:8000/api/v1/course/lecture/${lectureId}`, 
+        const res = await axios.delete(`https://coursemacy.onrender.com/course/lecture/${lectureId}`, 
         {withCredentials:true})
         if(res.data.success){
             navigate(`/admin/course/${courseId}/lecture`)

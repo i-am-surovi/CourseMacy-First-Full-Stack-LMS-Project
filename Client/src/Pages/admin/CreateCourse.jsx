@@ -27,7 +27,7 @@ const CreateCourse = () => {
   const CreateCourseHandler = async ()=> {
     try {
         setLoading(true)
-        const res = await axios.post('http://localhost:8000/api/v1/course/', {courseTitle, category}, {
+        const res = await axios.post('https://coursemacy.onrender.com/course/', {courseTitle, category}, {
             headers: {
                 "Content-Type":"application/json"
             },

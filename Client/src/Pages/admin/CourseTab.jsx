@@ -41,7 +41,7 @@ const CourseTab = () => {
 
   const getCourseById = async () => {
     try {
-      const res = await axios.get(`http://localhost:8000/api/v1/course/${id}`, {
+      const res = await axios.get(`https://coursemacy.onrender.com/course/${id}`, {
         withCredentials: true,
       });
       if (res.data.success) {
@@ -113,7 +113,7 @@ const CourseTab = () => {
     try {
       SetLoading(true);
       const res = await axios.put(
-        `http://localhost:8000/api/v1/course/${id}`,
+        `https://coursemacy.onrender.com/course/${id}`,
         formData,
         {
           headers: {
@@ -138,7 +138,7 @@ const CourseTab = () => {
     try {
       setRemoveLoading(true);
       const res = await axios.delete(
-        `http://localhost:8000/api/v1/course/${id}`,
+        `https://coursemacy.onrender.com/course/${id}`,
         {
           withCredentials: true,
         }
@@ -160,7 +160,7 @@ const CourseTab = () => {
   const togglePublishUnpublish = async (action) => {
     try {
       const res = await axios.patch(
-        `http://localhost:8000/api/v1/course/${id}`,
+        `https://coursemacy.onrender.com/course/${id}`,
         {
           params: {
             action,

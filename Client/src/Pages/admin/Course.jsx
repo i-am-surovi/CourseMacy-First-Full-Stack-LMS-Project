@@ -27,7 +27,7 @@ const Course = () => {
   useEffect(() => {
     const getCreatorCourse = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/api/v1/course/", {
+        const res = await axios.get("https://coursemacy.onrender.com/course/", {
           withCredentials: true,
         });
         if (res.data.success) {

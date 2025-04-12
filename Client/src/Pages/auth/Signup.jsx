@@ -29,7 +29,7 @@ const Signup = () => {
     console.log(user);
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/v1/user/register",
+        "https://coursemacy.onrender.com/user/register",
         user,
         {
           headers: {
